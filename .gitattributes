@@ -7,3 +7,7 @@
 *.woff2 binary
 # Windows 批处理必须保持 CRLF
 *.bat text eol=crlf
+
+# Generated demo and E2E exports are not source-language statistics.
+site/index.html linguist-generated=true
+docs/e2e-shots/matching-sheet-e2e.html linguist-generated=true
