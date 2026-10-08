@@ -6,7 +6,7 @@ labels: bug
 <!-- 提交前请先阅读 CONTRIBUTING.md 与 README「口径边界与免责声明」；
      请勿附真实商务数据、检测报告或未脱敏日志。 -->
 
-**环境**：WSL / Windows `.e2e-venv` / 其他；版本 tag（如 `v24-final`）
+**环境**：WSL / Windows `.e2e-venv` / 其他；公开版本（当前 v0）与提交 SHA
 
 **复现步骤**（最小可复现优先，演示数据 `--data-mode demo` 可复现最佳）：
 
