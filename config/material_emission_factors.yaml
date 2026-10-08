@@ -1,0 +1,80 @@
+# 材料排放因子表：净减排核算按「角色 role」显式解析（禁止硬编码因子 ID）。
+# 字段：factor_id、role（baseline_material / project_material / transport）、
+#       stage、material_code、value、unit、boundary、region、year、
+#       source_name、source_url、version、grade（演示假设 / 权威）、
+#       applies_to（运输因子适用运输方式）、transport_included_in_factor（默认 false）。
+# 因子缺失或字段不完整时输出「待补证据」与具体阻断字段，禁止用 0 代替。
+# grade=演示假设 的因子全部为虚构值，不得用于真实减排结论。
+baseline_transport_distance_km: 100   # 基准情景原生粒料运输距离（演示假设）
+
+# 核算约定：因子边界兼容性按此显式判定，满足约定才能相减（A04）。
+accounting_convention:
+  name: 演示核算约定（cut-off，交付颗粒口径）
+  waste_burden: cut-off（废料起点零负担，不含前生命周期负担，也不叠加处置信用）
+  recycled_boundary_keywords: [gate-to-gate]
+  virgin_boundary_keywords: [cradle-to-gate]
+  transport_included_in_factor: false
+  basis: 交付 1 t 满足需方规格的合格颗粒
+  yield_note: 收率损失已含在再生生产因子内；交付口径为已造粒成品时不做额外折算
+  # P0-7：基准情景的运输方式（需求/项目层独立配置）。候选的运输方式只影响项目侧，
+  # 同一需求下所有候选共享同一个冻结基准；只有显式修改本配置（建立新基准版本）才会变化。
+  baseline_transport_mode: 公路货运
+
+# 到厂成本假设（演示值，待真实报价替换；缺价不按 0）。
+cost_assumptions:
+  freight_rate_cny_per_tkm: 0.35
+  handling_fee_cny_per_t: 20.0
+  inspection_fee_per_batch_cny: 800.0
+  default_yield: 1.0
+
+factors:
+  - factor_id: DEMO-VIRGIN-PP-PROD
+    role: baseline_material
+    stage: virgin_production
+    material_code: PP
+    value: 1800.0
+    unit: kgCO2e/t
+    boundary: cradle-to-gate（聚合→粒料，不含出厂运输）
+    region: 中国
+    year: 2025
+    source_name: 演示假设因子（虚构值，待真实因子库替换）
+    source_url: ""
+    version: 1
+    grade: 演示假设
+  - factor_id: DEMO-PP-RECYCLE-PROCESS
+    role: project_material
+    stage: recycled_granule_production
+    material_code: PP
+    value: 400.0
+    unit: kgCO2e/t
+    boundary: gate-to-gate（收集、分选、清洗、造粒，不含运输）
+    region: 中国
+    year: 2025
+    source_name: 演示假设因子（虚构值，待真实因子库替换）
+    source_url: ""
+    version: 1
+    grade: 演示假设
+  - factor_id: DEFRA-ARTIC-HGV-DIESEL-2024
+    role: transport
+    stage: transport
+    material_code: ANY
+    value: 0.07447
+    unit: kgCO2e/(t·km)
+    boundary: TTW（仅燃烧排放，不含上游 WTT）
+    region: 英国
+    year: 2024
+    applies_to: [公路货运]
+    transport_included_in_factor: false
+    source_name: "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」"
+    source_url: https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024
+    version: 1
+    grade: 权威
+
+# 敏感性参数注册表：结论稳定性核查的确定性扰动（SALib 式问题定义）
+# low_factor/high_factor 为相对基准值的缩放；扰动范围是演示假设，不是统计置信区间。
+sensitivity:
+  baseline_transport_distance_km: {low_factor: 0.8, high_factor: 1.2, label: 基准运输距离}
+  DEMO-PP-RECYCLE-PROCESS: {low_factor: 0.9, high_factor: 1.1, label: 再生PP颗粒生产因子}
+  transport_factor: {low_factor: 0.9, high_factor: 1.1, label: 运输因子}
+  joint:
+    - [baseline_transport_distance_km, DEMO-PP-RECYCLE-PROCESS]

@@ -1,0 +1,167 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.local/green-passport-v2",
+  "title": "供需透镜 证据护照 Schema v2",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "generated_at",
+    "versions",
+    "demand",
+    "supplies",
+    "factors",
+    "options",
+    "representatives",
+    "boundaries"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": {"type": "string", "enum": ["2.0.0"]},
+    "generated_at": {"type": "string"},
+    "run_id": {"type": ["string", "null"]},
+    "case_id": {"type": ["string", "null"]},
+    "scenario_id": {"type": ["string", "null"]},
+    "data_mode": {
+      "type": "object",
+      "required": ["resolved"],
+      "properties": {
+        "requested": {"type": ["string", "null"]},
+        "resolved": {"type": "string"},
+        "fallback_reason": {"type": "string"}
+      }
+    },
+    "versions": {
+      "type": "object",
+      "required": ["algorithm_version", "rule_version", "schema_version"],
+      "properties": {
+        "algorithm_version": {"type": "string"},
+        "rule_version": {"type": "string"},
+        "schema_version": {"type": "string"},
+        "factor_config_sha256": {"type": ["string", "null"]}
+      }
+    },
+    "demand": {
+      "type": "object",
+      "required": ["demand_id", "required_mass_t", "normalized_record_sha256"],
+      "properties": {
+        "demand_id": {"type": "string"},
+        "buyer_name": {"type": "string"},
+        "target_material_code": {"type": "string"},
+        "application": {"type": "string"},
+        "required_mass_t": {"type": "number"},
+        "normalized_record_sha256": {"type": "string"},
+        "input_file_sha256": {"type": ["string", "null"]},
+        "provenance": {"type": "string"}
+      }
+    },
+    "input_files": {
+      "type": "object",
+      "properties": {
+        "demand_file_sha256": {"type": ["string", "null"]},
+        "supply_file_sha256": {"type": ["string", "null"]},
+        "factor_file_sha256": {"type": ["string", "null"]},
+        "note": {"type": "string"}
+      }
+    },
+    "supplies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["supply_id", "normalized_record_sha256", "evidence"],
+        "properties": {
+          "supply_id": {"type": "string"},
+          "supplier_name": {"type": "string"},
+          "normalized_record_sha256": {"type": "string"},
+          "available_mass_t": {"type": ["number", "null"]},
+          "evidence": {
+            "type": "object",
+            "required": ["verification_status"],
+            "properties": {
+              "source": {"type": "string"},
+              "date": {"type": "string"},
+              "verification_status": {"type": "string", "enum": ["eligible", "pending_evidence", "ineligible"]},
+              "provenance": {"type": "string"}
+            }
+          },
+          "source_grade": {"type": "string"}
+        }
+      }
+    },
+    "factors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["factor_id", "role", "boundary", "unit"],
+        "properties": {
+          "factor_id": {"type": "string"},
+          "role": {"type": "string"},
+          "stage": {"type": "string"},
+          "version": {},
+          "boundary": {"type": "string"},
+          "unit": {"type": "string"},
+          "region": {"type": "string"},
+          "year": {},
+          "grade": {"type": "string", "enum": ["演示假设", "权威"]},
+          "source_name": {"type": "string"}
+        }
+      }
+    },
+    "options": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["option_id", "kind", "allocation"],
+        "properties": {
+          "option_id": {"type": "string"},
+          "kind": {"type": "string", "enum": ["baseline", "single", "combo"]},
+          "label": {"type": "string"},
+          "allocation": {"type": "object"},
+          "total_cost_cny": {"type": ["number", "null"]},
+          "net_avoided_kgco2e": {"type": ["number", "null"]},
+          "recycled_mass_t": {"type": ["number", "null"]},
+          "category": {"type": "string"},
+          "order_max_share": {"type": ["number", "null"]},
+          "problems": {"type": "array"},
+          "emission_terms": {"type": ["array", "null"]}
+        }
+      }
+    },
+    "representatives": {
+      "type": "array",
+      "items": {"type": "string"}
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "actions": {"type": "array"},
+        "quality": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["supply_id", "score", "grade", "gate_state"],
+            "properties": {
+              "supply_id": {"type": "string"},
+              "score": {"type": "number"},
+              "grade": {"type": "string", "enum": ["高", "中", "低"]},
+              "flags": {"type": "array"},
+              "critical_missing": {"type": "array"},
+              "gate_state": {"type": "string", "enum": ["eligible", "pending_evidence", "ineligible"]}
+            }
+          }
+        }
+      }
+    },
+    "unknowns": {"type": "array"},
+    "boundaries": {
+      "type": "object",
+      "required": ["functional_unit", "scope"],
+      "properties": {
+        "functional_unit": {"type": "string"},
+        "scope": {"type": "string"},
+        "emission_note": {"type": "string"},
+        "demo_note": {"type": "string"}
+      }
+    },
+    "next_actions": {"type": "array"}
+  }
+}

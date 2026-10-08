@@ -1,0 +1,2 @@
+scenario_id,candidate_id,decision,reason_code,notes,reviewed_at,rule_version
+DEM-001,SUP-01,通过,M-OK,示例：批次规格与检测报告已人工核对,2026-09-02,v1

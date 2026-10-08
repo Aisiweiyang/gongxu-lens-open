@@ -1,0 +1,23 @@
+# 证据动作配置：证据价值排序读取检测费用与周转时间。
+# 未知费用/时间写「待询」，系统不输出伪精确 ROI。
+actions:
+  - action_id: DETECTION_REPORT
+    name: 取得第三方检测报告
+    blocks: [再生含量, 水分, 灰分, 熔指]
+    fee_cny: 待询
+    lead_days: 待询
+  - action_id: PRICE_QUOTE
+    name: 确认含运价格
+    blocks: [价格]
+    fee_cny: 0
+    lead_days: 1
+  - action_id: ROUTE_CHECK
+    name: 核对实际运输路线
+    blocks: [距离]
+    fee_cny: 待询
+    lead_days: 2
+  - action_id: CAPACITY_COMMITMENT
+    name: 取得产能承诺函
+    blocks: [数量]
+    fee_cny: 0
+    lead_days: 3

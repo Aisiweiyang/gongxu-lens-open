@@ -1,0 +1,8 @@
+# 行业定义：唯一默认行业「再生PP」。
+industries:
+  - name: 再生PP
+    keywords: [再生PP, 再生聚丙烯, PP颗粒, 再生塑料]
+    chain:
+      upstream: [回收, 分选, 清洗, 破碎, 造粒]
+      midstream: [改性, 加工, 生产, 制造]
+      downstream: [包装, 周转箱, 注塑, 制品, 应用]

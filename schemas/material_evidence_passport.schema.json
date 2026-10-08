@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Material Evidence Passport",
+  "type": "object",
+  "required": ["schema_version", "generated_at", "demand", "supplies", "factors", "rules", "options"],
+  "properties": {
+    "schema_version": {"type": "string"},
+    "generated_at": {"type": "string"},
+    "demand": {
+      "type": "object",
+      "required": ["demand_id", "target_material_code", "required_mass_t"],
+      "properties": {
+        "demand_id": {"type": "string"},
+        "target_material_code": {"type": "string"},
+        "required_mass_t": {"type": "number"}
+      }
+    },
+    "supplies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["supply_id", "material", "evidence"],
+        "properties": {
+          "supply_id": {"type": "string"},
+          "evidence": {
+            "type": "object",
+            "required": ["verification_status"],
+            "properties": {
+              "verification_status": {
+                "type": "string",
+                "enum": ["eligible", "pending_evidence", "ineligible"]
+              }
+            }
+          }
+        }
+      }
+    },
+    "factors": {"type": "array"},
+    "rules": {"type": "object"},
+    "options": {"type": "array"}
+  }
+}

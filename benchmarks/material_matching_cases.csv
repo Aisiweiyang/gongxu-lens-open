@@ -1,0 +1,7 @@
+case_id,raw_name,expected_supply_id,expected_reject_reason,label_source
+CASE-01,PP再生颗粒黑色注塑级,SUP-01,,人工标注演示集
+CASE-02,rPP 黑色粒料,SUP-01,,人工标注演示集（缩写/中英混写）
+CASE-03,再生聚丙烯颗粒 灰色,SUP-02,,人工标注演示集（同义词）
+CASE-04,高流动PP再生颗粒 厂家直供 现货,SUP-03,,人工标注演示集（噪声词）
+CASE-05,ABS再生颗粒黑色,SUP-01,,人工标注演示集（近似但不兼容材料）
+CASE-06,,SUP-01,,人工标注演示集（空值）

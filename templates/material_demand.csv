@@ -1,0 +1,2 @@
+demand_id,buyer_name,target_material_code,application,required_mass_t,min_recycled_content_pct,mfi_min,mfi_max,max_moisture_pct,max_ash_pct,accepted_form,accepted_color,required_from,due_date,destination,baseline_virgin_price_cny_per_t,max_distance_km,evidence_source,source
+（示例）DEM-001,某包装制品有限公司,PP,非食品接触周转箱,15,80,8,16,0.5,5,颗粒,黑色、灰色,2026-09-15,2026-10-15,某园区,5500,300,采购规格书（示例）,示例

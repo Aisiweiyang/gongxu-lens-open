@@ -1,0 +1,21 @@
+case_id,split,task,query_name,relevant_supply_ids,source_supply_id,field_overrides,expected_state,reject_label,label_source
+CASE-01,dev,recall,PP再生颗粒黑色注塑级,SUP-01,,,,"",人工标注演示集
+CASE-02,dev,recall,rPP 黑色粒料,SUP-01,,,,"",人工标注演示集（缩写/中英混写）
+CASE-03,dev,recall,再生聚丙烯颗粒 灰色,SUP-02,,,,"",人工标注演示集（同义词）
+CASE-04,dev,recall,高流动PP再生颗粒 厂家直供 现货,SUP-03,,,,"",人工标注演示集（噪声词）
+CASE-05,dev,recall,再生PP颗粒 注塑级 回收料,SUP-01;SUP-04,,,,"",人工标注演示集（多相关项）
+CASE-06,holdout,recall,黑色再生pp 粒料 循环,SUP-01;SUP-02,,,,"",人工标注演示集（同义词+颜色，多相关项）
+CASE-07,dev,recall,ABS再生颗粒黑色,,SUP-01,"{""material_code"": ""ABS"", ""polymer_type"": ""ABS""}",,近似但不兼容材料（负例）,人工标注演示集
+CASE-08,holdout,recall,,,SUP-01,,,空查询（须显式拒绝，不得补回正常值）,人工标注演示集
+CASE-09,dev,recall,再生PE颗粒黑色,,SUP-01,"{""material_code"": ""PE"", ""polymer_type"": ""PE""}",,相似名称但用途不符（负例）,人工标注演示集
+CASE-10,holdout,recall,PP再生颗粒黑色 注塑级 厂家直供,SUP-01,,,,"",噪声词+正常名（保留集）,人工标注演示集
+CASE-11,dev,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""mfi_g_10min"": 20.0}",ineligible,正负规格（熔指超上限）,人工标注演示集
+CASE-12,dev,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""mfi_g_10min"": 16.0}",eligible,临界值（恰在上限，应通过）,人工标注演示集
+CASE-13,dev,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""evidence_source"": """"}",pending_evidence,缺证据（数值无报告支撑）,人工标注演示集
+CASE-14,holdout,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""available_to"": ""2026-09-10""}",ineligible,时窗不符,人工标注演示集
+CASE-15,dev,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""moisture_pct"": 0.7}",ineligible,正负规格（水分超标）,人工标注演示集
+CASE-16,holdout,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""recycled_content_pct"": 60.0}",ineligible,正负规格（再生含量不足）,人工标注演示集
+CASE-17,dev,gate_reject,PP再生颗粒黑色,SUP-01,SUP-01,"{""color"": ""白色""}",ineligible,正负规格（颜色不符）,人工标注演示集
+CASE-18,holdout,recall,黑色粒料现货,,,,,无材料语义查询（v13 门控：仅兜底不召回）,人工标注演示集
+CASE-19,holdout,recall,灰色粒子,,,,,通用词查询（v13 门控：仅兜底不召回）,人工标注演示集
+CASE-20,holdout,recall,黑色注塑料 无牌号,,,,,噪声词+无材料语义（v13 门控：仅兜底不召回）,人工标注演示集

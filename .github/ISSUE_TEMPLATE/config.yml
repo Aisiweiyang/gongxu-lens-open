@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 安全漏洞报告
+    url: https://github.com/Aisiweiyang/gongxu-lens-open/security/advisories/new
+    about: 请勿以公开 Issue 报告安全漏洞，走私密安全报告（见 SECURITY.md）

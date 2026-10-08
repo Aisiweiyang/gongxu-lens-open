@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="122" height="20" role="img" aria-label="cross-checks: 7/7">
+<linearGradient id="s" x2="0" y2="100%"><stop offset="0" stop-color="#bbb" stop-opacity=".1"/><stop offset="1" stop-opacity=".1"/></linearGradient>
+<clipPath id="r"><rect width="122" height="20" rx="3" fill="#fff"/></clipPath>
+<g clip-path="url(#r)"><rect width="82" height="20" fill="#555"/><rect x="82" width="40" height="20" fill="#1e6b49"/><rect width="122" height="20" fill="url(#s)"/></g>
+<g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" font-size="11">
+<text x="41.0" y="14" fill="#010101" fill-opacity=".3">cross-checks</text><text x="41.0" y="13">cross-checks</text>
+<text x="102.0" y="14" fill="#010101" fill-opacity=".3">7/7</text><text x="102.0" y="13">7/7</text></g>
+</svg>

@@ -1,0 +1,2 @@
+supply_id,supplier_id,supplier_name,material_code,material_name_raw,polymer_type,form,color,grade,mfi_g_10min,moisture_pct,ash_pct,recycled_content_pct,available_mass_t,available_from,available_to,origin,price_cny_per_t,preprocessing,transport_mode,factor_id,evidence_source,evidence_date,source
+（示例）SUP-001,,某再生资源有限公司,PP,某牌号再生PP颗粒,PP,颗粒,黑色,注塑级,12,0.3,3,95,20,2026-09-10,2026-10-31,某园区,4200,已造粒,公路货运,DEFRA-ARTIC-HGV-DIESEL-2024,检测报告编号（示例）,2026-08-15,示例

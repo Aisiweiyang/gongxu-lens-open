@@ -1,0 +1,102 @@
+{
+ "meta": {
+  "tag": "v22parallel-wsl",
+  "login": "shared",
+  "fixture": "large",
+  "iterations": 1,
+  "levels": [
+   1
+  ],
+  "target": "spawned subprocess (pilot/start_pilot.py, temp db)",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "3.14.4",
+  "cpu": 24,
+  "hostname": "localhost",
+  "generated_at": "2026-09-15T08:39:39"
+ },
+ "runs": [
+  {
+   "level": 1,
+   "steps": {
+    "login": {
+     "n": 0,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": null,
+     "p50_ms": null,
+     "p95_ms": null,
+     "p99_ms": null,
+     "max_ms": null,
+     "bytes_total": 0
+    },
+    "me": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 3.8,
+     "p50_ms": 3.8,
+     "p95_ms": 3.8,
+     "p99_ms": 3.8,
+     "max_ms": 3.8,
+     "bytes_total": 45
+    },
+    "tasks": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 1.3,
+     "p50_ms": 1.3,
+     "p95_ms": 1.3,
+     "p99_ms": 1.3,
+     "max_ms": 1.3,
+     "bytes_total": 712
+    },
+    "run": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 549220.7,
+     "p50_ms": 549220.7,
+     "p95_ms": 549220.7,
+     "p99_ms": 549220.7,
+     "max_ms": 549220.7,
+     "bytes_total": 82
+    },
+    "result": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 394.4,
+     "p50_ms": 394.4,
+     "p95_ms": 394.4,
+     "p99_ms": 394.4,
+     "max_ms": 394.4,
+     "bytes_total": 27538291
+    },
+    "passport": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 256.6,
+     "p50_ms": 256.6,
+     "p95_ms": 256.6,
+     "p99_ms": 256.6,
+     "max_ms": 256.6,
+     "bytes_total": 10393171
+    }
+   },
+   "summary": {
+    "requests": 5,
+    "errors": 0,
+    "error_rate": 0.0,
+    "wall_s": 550.17,
+    "rps": 0.01,
+    "engine_runs": 1,
+    "engine_runs_per_s": 0.002,
+    "engine_p50_ms": 549220.7,
+    "engine_p95_ms": 549220.7,
+    "engine_p99_ms": 549220.7
+   }
+  }
+ ]
+}

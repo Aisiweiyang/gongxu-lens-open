@@ -1,0 +1,24 @@
+__pycache__/
+*.pyc
+.venv/
+.uv-cache/
+data/input/*.csv
+!data/input/README.md
+output/*.md
+output/*.html
+!output/legacy/
+
+# v14 git 补充：运行时/构建产物不入库
+.e2e-venv/
+dist/
+pilot/data/
+pilot/backups/
+.pytest_cache/
+
+# 文档生成器本地依赖
+tools/docx/node_modules/
+
+# 本地验证环境与日志
+.test-temp/
+.release-venv/
+*.log

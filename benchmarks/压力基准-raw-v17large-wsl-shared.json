@@ -1,0 +1,270 @@
+{
+ "meta": {
+  "tag": "v17large-wsl",
+  "login": "shared",
+  "fixture": "large",
+  "iterations": 1,
+  "levels": [
+   1,
+   2,
+   4
+  ],
+  "target": "spawned subprocess (pilot/start_pilot.py, temp db)",
+  "platform": "Linux-6.18.33.1-microsoft-standard-WSL2-x86_64-with-glibc2.43",
+  "python": "3.14.4",
+  "cpu": 24,
+  "hostname": "localhost",
+  "generated_at": "2026-09-13T23:36:18"
+ },
+ "runs": [
+  {
+   "level": 1,
+   "steps": {
+    "login": {
+     "n": 0,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": null,
+     "p50_ms": null,
+     "p95_ms": null,
+     "p99_ms": null,
+     "max_ms": null,
+     "bytes_total": 0
+    },
+    "me": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 8.4,
+     "p50_ms": 8.4,
+     "p95_ms": 8.4,
+     "p99_ms": 8.4,
+     "max_ms": 8.4,
+     "bytes_total": 45
+    },
+    "tasks": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 2.0,
+     "p50_ms": 2.0,
+     "p95_ms": 2.0,
+     "p99_ms": 2.0,
+     "max_ms": 2.0,
+     "bytes_total": 712
+    },
+    "run": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 809011.8,
+     "p50_ms": 809011.8,
+     "p95_ms": 809011.8,
+     "p99_ms": 809011.8,
+     "max_ms": 809011.8,
+     "bytes_total": 82
+    },
+    "result": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 622.4,
+     "p50_ms": 622.4,
+     "p95_ms": 622.4,
+     "p99_ms": 622.4,
+     "max_ms": 622.4,
+     "bytes_total": 27538291
+    },
+    "passport": {
+     "n": 1,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 441.6,
+     "p50_ms": 441.6,
+     "p95_ms": 441.6,
+     "p99_ms": 441.6,
+     "max_ms": 441.6,
+     "bytes_total": 10393171
+    }
+   },
+   "summary": {
+    "requests": 5,
+    "errors": 0,
+    "error_rate": 0.0,
+    "wall_s": 810.56,
+    "rps": 0.01,
+    "engine_runs": 1,
+    "engine_runs_per_s": 0.001,
+    "engine_p50_ms": 809011.8,
+    "engine_p95_ms": 809011.8,
+    "engine_p99_ms": 809011.8
+   }
+  },
+  {
+   "level": 2,
+   "steps": {
+    "login": {
+     "n": 0,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": null,
+     "p50_ms": null,
+     "p95_ms": null,
+     "p99_ms": null,
+     "max_ms": null,
+     "bytes_total": 0
+    },
+    "me": {
+     "n": 2,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 12.7,
+     "p50_ms": 11.0,
+     "p95_ms": 14.3,
+     "p99_ms": 14.3,
+     "max_ms": 14.3,
+     "bytes_total": 90
+    },
+    "tasks": {
+     "n": 2,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 2.7,
+     "p50_ms": 2.3,
+     "p95_ms": 3.1,
+     "p99_ms": 3.1,
+     "max_ms": 3.1,
+     "bytes_total": 2826
+    },
+    "run": {
+     "n": 2,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 1187814.1,
+     "p50_ms": 1183928.7,
+     "p95_ms": 1191699.5,
+     "p99_ms": 1191699.5,
+     "max_ms": 1191699.5,
+     "bytes_total": 166
+    },
+    "result": {
+     "n": 2,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 1168.3,
+     "p50_ms": 693.2,
+     "p95_ms": 1643.5,
+     "p99_ms": 1643.5,
+     "max_ms": 1643.5,
+     "bytes_total": 55076582
+    },
+    "passport": {
+     "n": 2,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 524.9,
+     "p50_ms": 512.7,
+     "p95_ms": 537.2,
+     "p99_ms": 537.2,
+     "max_ms": 537.2,
+     "bytes_total": 20786342
+    }
+   },
+   "summary": {
+    "requests": 10,
+    "errors": 0,
+    "error_rate": 0.0,
+    "wall_s": 1193.59,
+    "rps": 0.01,
+    "engine_runs": 2,
+    "engine_runs_per_s": 0.002,
+    "engine_p50_ms": 1183928.7,
+    "engine_p95_ms": 1191699.5,
+    "engine_p99_ms": 1191699.5
+   }
+  },
+  {
+   "level": 4,
+   "steps": {
+    "login": {
+     "n": 0,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": null,
+     "p50_ms": null,
+     "p95_ms": null,
+     "p99_ms": null,
+     "max_ms": null,
+     "bytes_total": 0
+    },
+    "me": {
+     "n": 4,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 14.1,
+     "p50_ms": 12.9,
+     "p95_ms": 17.5,
+     "p99_ms": 17.5,
+     "max_ms": 17.5,
+     "bytes_total": 180
+    },
+    "tasks": {
+     "n": 4,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 11.6,
+     "p50_ms": 11.4,
+     "p95_ms": 12.8,
+     "p99_ms": 12.8,
+     "max_ms": 12.8,
+     "bytes_total": 11260
+    },
+    "run": {
+     "n": 4,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 1087741.6,
+     "p50_ms": 1086322.2,
+     "p95_ms": 1092179.8,
+     "p99_ms": 1092179.8,
+     "max_ms": 1092179.8,
+     "bytes_total": 332
+    },
+    "result": {
+     "n": 4,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 685.5,
+     "p50_ms": 521.2,
+     "p95_ms": 973.9,
+     "p99_ms": 973.9,
+     "max_ms": 973.9,
+     "bytes_total": 110153164
+    },
+    "passport": {
+     "n": 4,
+     "errors": 0,
+     "error_statuses": [],
+     "mean_ms": 479.3,
+     "p50_ms": 339.6,
+     "p95_ms": 964.2,
+     "p99_ms": 964.2,
+     "max_ms": 964.2,
+     "bytes_total": 41572684
+    }
+   },
+   "summary": {
+    "requests": 20,
+    "errors": 0,
+    "error_rate": 0.0,
+    "wall_s": 1093.14,
+    "rps": 0.02,
+    "engine_runs": 4,
+    "engine_runs_per_s": 0.004,
+    "engine_p50_ms": 1086322.2,
+    "engine_p95_ms": 1092179.8,
+    "engine_p99_ms": 1092179.8
+   }
+  }
+ ]
+}

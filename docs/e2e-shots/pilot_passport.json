@@ -1,0 +1,2951 @@
+{
+  "schema_version": "2.0.0",
+  "generated_at": "2026-09-18T02:46:20+08:00",
+  "run_id": "e0f08013cd2546f7b9ca81bd76742689",
+  "case_id": "E2E-001",
+  "scenario_id": "local",
+  "data_mode": {
+    "requested": "local",
+    "resolved": "local",
+    "fallback_reason": ""
+  },
+  "versions": {
+    "algorithm_version": "material-v8",
+    "rule_version": "material-gates-v2",
+    "schema_version": "2.0.0",
+    "factor_config_sha256": "dc1b0175d0e3e2e3bc10f2055fb76556eab289a4b9ed69e774da0f6fe22a22c0"
+  },
+  "demand": {
+    "demand_id": "E2E-001",
+    "buyer_name": "端到端需方",
+    "target_material_code": "PP",
+    "application": "周转箱",
+    "required_mass_t": 15.0,
+    "normalized_record_sha256": "10cb0dabbe5be0d1f2a5a43e1e4ea4398253f8d9036afecdaf4ac7bad8692ccc",
+    "input_file_sha256": null,
+    "provenance": "未标注"
+  },
+  "input_files": {
+    "demand_file_sha256": null,
+    "supply_file_sha256": null,
+    "factor_file_sha256": "dc1b0175d0e3e2e3bc10f2055fb76556eab289a4b9ed69e774da0f6fe22a22c0",
+    "note": "文件哈希标识文件身份；哈希不能证明源数据真实。"
+  },
+  "supplies": [
+    {
+      "supply_id": "S1",
+      "supplier_name": "甲",
+      "normalized_record_sha256": "bb2c03dfff7a6f513e69191abd94f9528eca42cd787df7844b59ecb1d3099e21",
+      "material": {
+        "material_code": "PP",
+        "material_name_raw": "再生PP颗粒（黑色）",
+        "polymer_type": "PP",
+        "form": "颗粒",
+        "color": "黑色",
+        "grade": "注塑级",
+        "mfi_g_10min": 12.0,
+        "moisture_pct": 0.3,
+        "ash_pct": 3.0,
+        "recycled_content_pct": 95.0
+      },
+      "available_mass_t": 8.0,
+      "evidence": {
+        "source": "检测报告",
+        "date": "2026-08-15",
+        "verification_status": "eligible",
+        "provenance": "测试"
+      },
+      "source_grade": "未标注"
+    },
+    {
+      "supply_id": "S2",
+      "supplier_name": "乙",
+      "normalized_record_sha256": "4343d779f7d9373cb30a7b0fd80b1646754784a22502ec700ada4e56135ab765",
+      "material": {
+        "material_code": "PP",
+        "material_name_raw": "再生PP颗粒（黑色）",
+        "polymer_type": "PP",
+        "form": "颗粒",
+        "color": "黑色",
+        "grade": "注塑级",
+        "mfi_g_10min": 11.0,
+        "moisture_pct": 0.3,
+        "ash_pct": 3.5,
+        "recycled_content_pct": 90.0
+      },
+      "available_mass_t": 18.0,
+      "evidence": {
+        "source": "检测报告",
+        "date": "2026-08-05",
+        "verification_status": "eligible",
+        "provenance": "测试"
+      },
+      "source_grade": "未标注"
+    }
+  ],
+  "factors": [
+    {
+      "factor_id": "DEMO-VIRGIN-PP-PROD",
+      "role": "baseline_material",
+      "stage": "virgin_production",
+      "version": 1,
+      "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+      "unit": "kgCO2e/t",
+      "region": "中国",
+      "year": 2025,
+      "grade": "演示假设",
+      "source_name": "演示假设因子（虚构值，待真实因子库替换）"
+    },
+    {
+      "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+      "role": "project_material",
+      "stage": "recycled_granule_production",
+      "version": 1,
+      "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+      "unit": "kgCO2e/t",
+      "region": "中国",
+      "year": 2025,
+      "grade": "演示假设",
+      "source_name": "演示假设因子（虚构值，待真实因子库替换）"
+    },
+    {
+      "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+      "role": "transport",
+      "stage": "transport",
+      "version": 1,
+      "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+      "unit": "kgCO2e/(t·km)",
+      "region": "英国",
+      "year": 2024,
+      "grade": "权威",
+      "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」"
+    }
+  ],
+  "accounting_convention": {
+    "name": "演示核算约定（cut-off，交付颗粒口径）",
+    "waste_burden": "cut-off（废料起点零负担，不含前生命周期负担，也不叠加处置信用）",
+    "recycled_boundary_keywords": [
+      "gate-to-gate"
+    ],
+    "virgin_boundary_keywords": [
+      "cradle-to-gate"
+    ],
+    "transport_included_in_factor": false,
+    "basis": "交付 1 t 满足需方规格的合格颗粒",
+    "yield_note": "收率损失已含在再生生产因子内；交付口径为已造粒成品时不做额外折算",
+    "baseline_transport_mode": "公路货运"
+  },
+  "options": [
+    {
+      "option_id": "opt-base-8bd8081867",
+      "kind": "baseline",
+      "label": "基准方案（全部原生 PP）",
+      "allocation": {},
+      "allocation_labels": {},
+      "total_cost_cny": 83025.0,
+      "cost_ledger": null,
+      "net_avoided_kgco2e": 0.0,
+      "recycled_mass_t": 0.0,
+      "category": "基准",
+      "order_max_share": null,
+      "problems": []
+    },
+    {
+      "option_id": "opt-9444f786d73d",
+      "kind": "single",
+      "label": "乙",
+      "allocation": {
+        "S2": 15.0
+      },
+      "allocation_labels": {
+        "S2": "乙"
+      },
+      "total_cost_cny": 59820.0,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 15.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "15 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 57000.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 7200.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "15 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2520.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 15.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "15 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 300.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 59820.0,
+        "problems": [],
+        "planned": {
+          "material_cny": 57000.0,
+          "freight_cny": 2520.0,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 59820.0
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20575.521,
+      "recycled_mass_t": 13.5,
+      "category": "成本与碳双降",
+      "order_max_share": 1.0,
+      "problems": [],
+      "emission_terms": [
+        {
+          "supply_id": "S2",
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 15.0,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 15.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 15.0,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 15.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 480 km"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "option_id": "opt-7a9f24614436",
+      "kind": "combo",
+      "label": "组合：乙 14.5t + 甲 0.5t",
+      "allocation": {
+        "S1": 0.5,
+        "S2": 14.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 59941.25,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 0.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "0.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 2100.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 15.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "0.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 5.25,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 0.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "0.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 10.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 14.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "14.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 55100.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 6960.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "14.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2436.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 14.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "14.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 290.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 59941.25,
+        "problems": [],
+        "planned": {
+          "material_cny": 57200.0,
+          "freight_cny": 2441.25,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 59941.25
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20592.28,
+      "recycled_mass_t": 13.525,
+      "category": "成本与碳双降",
+      "order_max_share": 0.9667,
+      "problems": []
+    },
+    {
+      "option_id": "opt-4926d0cfb810",
+      "kind": "combo",
+      "label": "组合：乙 14t + 甲 1t",
+      "allocation": {
+        "S1": 1.0,
+        "S2": 14.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60062.5,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 1.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "1 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 4200.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 30.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "1 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 10.5,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 1.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "1 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 20.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 14.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "14 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 53200.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 6720.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "14 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2352.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 14.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "14 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 280.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60062.5,
+        "problems": [],
+        "planned": {
+          "material_cny": 57400.0,
+          "freight_cny": 2362.5,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60062.5
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20609.03,
+      "recycled_mass_t": 13.55,
+      "category": "成本与碳双降",
+      "order_max_share": 0.9333,
+      "problems": []
+    },
+    {
+      "option_id": "opt-792cc06c263e",
+      "kind": "combo",
+      "label": "组合：乙 13.5t + 甲 1.5t",
+      "allocation": {
+        "S1": 1.5,
+        "S2": 13.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60183.75,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 1.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "1.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 6300.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 45.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "1.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 15.749999999999998,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 1.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "1.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 30.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 13.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "13.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 51300.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 6480.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "13.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2268.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 13.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "13.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 270.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60183.75,
+        "problems": [],
+        "planned": {
+          "material_cny": 57600.0,
+          "freight_cny": 2283.75,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60183.75
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20625.79,
+      "recycled_mass_t": 13.575,
+      "category": "成本与碳双降",
+      "order_max_share": 0.9,
+      "problems": []
+    },
+    {
+      "option_id": "opt-26615b87ad63",
+      "kind": "combo",
+      "label": "组合：乙 13t + 甲 2t",
+      "allocation": {
+        "S1": 2.0,
+        "S2": 13.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60305.0,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 2.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "2 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 8400.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 60.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "2 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 21.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 2.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "2 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 40.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 13.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "13 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 49400.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 6240.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "13 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2184.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 13.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "13 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 260.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60305.0,
+        "problems": [],
+        "planned": {
+          "material_cny": 57800.0,
+          "freight_cny": 2205.0,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60305.0
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20642.54,
+      "recycled_mass_t": 13.6,
+      "category": "成本与碳双降",
+      "order_max_share": 0.8667,
+      "problems": []
+    },
+    {
+      "option_id": "opt-4e195d6cc29e",
+      "kind": "combo",
+      "label": "组合：乙 12.5t + 甲 2.5t",
+      "allocation": {
+        "S1": 2.5,
+        "S2": 12.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60426.25,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 2.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "2.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 10500.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 75.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "2.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 26.25,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 2.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "2.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 50.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 12.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "12.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 47500.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 6000.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "12.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2100.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 12.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "12.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 250.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60426.25,
+        "problems": [],
+        "planned": {
+          "material_cny": 58000.0,
+          "freight_cny": 2126.25,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60426.25
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20659.3,
+      "recycled_mass_t": 13.625,
+      "category": "成本与碳双降",
+      "order_max_share": 0.8333,
+      "problems": []
+    },
+    {
+      "option_id": "opt-854dfd1154f4",
+      "kind": "combo",
+      "label": "组合：乙 12t + 甲 3t",
+      "allocation": {
+        "S1": 3.0,
+        "S2": 12.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60547.5,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 3.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "3 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 12600.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 90.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "3 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 31.499999999999996,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 3.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "3 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 60.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 12.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "12 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 45600.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 5760.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "12 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 2015.9999999999998,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 12.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "12 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 240.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60547.5,
+        "problems": [],
+        "planned": {
+          "material_cny": 58200.0,
+          "freight_cny": 2047.5,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60547.5
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20676.06,
+      "recycled_mass_t": 13.65,
+      "category": "成本与碳双降",
+      "order_max_share": 0.8,
+      "problems": []
+    },
+    {
+      "option_id": "opt-ccca64ead5cc",
+      "kind": "combo",
+      "label": "组合：乙 11.5t + 甲 3.5t",
+      "allocation": {
+        "S1": 3.5,
+        "S2": 11.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60668.75,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 3.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "3.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 14700.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 105.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "3.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 36.75,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 3.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "3.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 70.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 11.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "11.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 43700.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 5520.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "11.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1931.9999999999998,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 11.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "11.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 230.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60668.75,
+        "problems": [],
+        "planned": {
+          "material_cny": 58400.0,
+          "freight_cny": 1968.75,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60668.75
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20692.81,
+      "recycled_mass_t": 13.675,
+      "category": "成本与碳双降",
+      "order_max_share": 0.7667,
+      "problems": []
+    },
+    {
+      "option_id": "opt-77d8419d30e3",
+      "kind": "combo",
+      "label": "组合：乙 11t + 甲 4t",
+      "allocation": {
+        "S1": 4.0,
+        "S2": 11.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60790.0,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 4.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "4 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 16800.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 120.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "4 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 42.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 4.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "4 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 80.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 11.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "11 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 41800.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 5280.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "11 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1847.9999999999998,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 11.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "11 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 220.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60790.0,
+        "problems": [],
+        "planned": {
+          "material_cny": 58600.0,
+          "freight_cny": 1890.0,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60790.0
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20709.57,
+      "recycled_mass_t": 13.7,
+      "category": "成本与碳双降",
+      "order_max_share": 0.7333,
+      "problems": [],
+      "emission_terms": [
+        {
+          "supply_id": "S1",
+          "mass_t": 4.0,
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 4.0,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 4.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 4.0,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 4.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 30 km"
+            }
+          ],
+          "status": "可计算"
+        },
+        {
+          "supply_id": "S2",
+          "mass_t": 11.0,
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 11.0,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 11.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 11.0,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 11.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 480 km"
+            }
+          ],
+          "status": "可计算"
+        }
+      ]
+    },
+    {
+      "option_id": "opt-d12b9633dd94",
+      "kind": "combo",
+      "label": "组合：乙 10.5t + 甲 4.5t",
+      "allocation": {
+        "S1": 4.5,
+        "S2": 10.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 60911.25,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 4.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "4.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 18900.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 135.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "4.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 47.25,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 4.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "4.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 90.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 10.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "10.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 39900.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 5040.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "10.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1764.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 10.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "10.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 210.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 60911.25,
+        "problems": [],
+        "planned": {
+          "material_cny": 58800.0,
+          "freight_cny": 1811.25,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 60911.25
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20726.32,
+      "recycled_mass_t": 13.725,
+      "category": "成本与碳双降",
+      "order_max_share": 0.7,
+      "problems": []
+    },
+    {
+      "option_id": "opt-c7d059ab01a8",
+      "kind": "combo",
+      "label": "组合：乙 10t + 甲 5t",
+      "allocation": {
+        "S1": 5.0,
+        "S2": 10.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61032.5,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 5.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 21000.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 150.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 52.5,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 5.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 100.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 10.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "10 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 38000.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 4800.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "10 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1680.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 10.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "10 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 200.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61032.5,
+        "problems": [],
+        "planned": {
+          "material_cny": 59000.0,
+          "freight_cny": 1732.5,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61032.5
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20743.08,
+      "recycled_mass_t": 13.75,
+      "category": "成本与碳双降",
+      "order_max_share": 0.6667,
+      "problems": []
+    },
+    {
+      "option_id": "opt-495f4dfd9416",
+      "kind": "combo",
+      "label": "组合：乙 9.5t + 甲 5.5t",
+      "allocation": {
+        "S1": 5.5,
+        "S2": 9.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61153.75,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 5.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "5.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 23100.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 165.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "5.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 57.74999999999999,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 5.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "5.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 110.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 9.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "9.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 36100.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 4560.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "9.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1596.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 9.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "9.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 190.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61153.75,
+        "problems": [],
+        "planned": {
+          "material_cny": 59200.0,
+          "freight_cny": 1653.75,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61153.75
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20759.83,
+      "recycled_mass_t": 13.775,
+      "category": "成本与碳双降",
+      "order_max_share": 0.6333,
+      "problems": []
+    },
+    {
+      "option_id": "opt-435e56e6c4a9",
+      "kind": "combo",
+      "label": "组合：乙 9t + 甲 6t",
+      "allocation": {
+        "S1": 6.0,
+        "S2": 9.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61275.0,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 6.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "6 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 25200.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 180.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "6 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 62.99999999999999,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 6.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "6 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 120.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 9.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "9 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 34200.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 4320.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "9 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1512.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 9.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "9 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 180.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61275.0,
+        "problems": [],
+        "planned": {
+          "material_cny": 59400.0,
+          "freight_cny": 1575.0,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61275.0
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20776.59,
+      "recycled_mass_t": 13.8,
+      "category": "成本与碳双降",
+      "order_max_share": 0.6,
+      "problems": []
+    },
+    {
+      "option_id": "opt-b9ea68311e98",
+      "kind": "combo",
+      "label": "组合：乙 8.5t + 甲 6.5t",
+      "allocation": {
+        "S1": 6.5,
+        "S2": 8.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61396.25,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 6.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "6.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 27300.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 195.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "6.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 68.25,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 6.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "6.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 130.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 8.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "8.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 32300.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 4080.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "8.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1428.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 8.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "8.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 170.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61396.25,
+        "problems": [],
+        "planned": {
+          "material_cny": 59600.0,
+          "freight_cny": 1496.25,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61396.25
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20793.35,
+      "recycled_mass_t": 13.825,
+      "category": "成本与碳双降",
+      "order_max_share": 0.5667,
+      "problems": []
+    },
+    {
+      "option_id": "opt-36ecc6498d29",
+      "kind": "combo",
+      "label": "组合：乙 8t + 甲 7t",
+      "allocation": {
+        "S1": 7.0,
+        "S2": 8.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61517.5,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 7.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "7 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 29400.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 210.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "7 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 73.5,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 7.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "7 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 140.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 8.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "8 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 30400.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 3840.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "8 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1344.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 8.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "8 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 160.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61517.5,
+        "problems": [],
+        "planned": {
+          "material_cny": 59800.0,
+          "freight_cny": 1417.5,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61517.5
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20810.1,
+      "recycled_mass_t": 13.85,
+      "category": "成本与碳双降",
+      "order_max_share": 0.5333,
+      "problems": []
+    },
+    {
+      "option_id": "opt-764913d9378c",
+      "kind": "combo",
+      "label": "组合：乙 7.5t + 甲 7.5t",
+      "allocation": {
+        "S1": 7.5,
+        "S2": 7.5
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61638.75,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 7.5,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "7.5 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 31500.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 225.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "7.5 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 78.75,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 7.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "7.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 150.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 7.5,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "7.5 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 28500.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 3600.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "7.5 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1260.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 7.5,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "7.5 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 150.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61638.75,
+        "problems": [],
+        "planned": {
+          "material_cny": 60000.0,
+          "freight_cny": 1338.75,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61638.75
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20826.86,
+      "recycled_mass_t": 13.875,
+      "category": "成本与碳双降",
+      "order_max_share": 0.5,
+      "problems": [],
+      "emission_terms": [
+        {
+          "supply_id": "S1",
+          "mass_t": 7.5,
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 30 km"
+            }
+          ],
+          "status": "可计算"
+        },
+        {
+          "supply_id": "S2",
+          "mass_t": 7.5,
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 7.5,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 480 km"
+            }
+          ],
+          "status": "可计算"
+        }
+      ]
+    },
+    {
+      "option_id": "opt-1b2ecd16f40e",
+      "kind": "combo",
+      "label": "组合：乙 7t + 甲 8t",
+      "allocation": {
+        "S1": 8.0,
+        "S2": 7.0
+      },
+      "allocation_labels": {
+        "S1": "甲",
+        "S2": "乙"
+      },
+      "total_cost_cny": 61760.0,
+      "cost_ledger": {
+        "lines": [
+          {
+            "item": "材料价",
+            "activity": 8.0,
+            "unit": "t",
+            "rate": 4200.0,
+            "formula": "8 t × 4200 CNY/t",
+            "source": "供给报价（S1，是否含运：否/未标注）",
+            "amount": 33600.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 240.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "8 t × 30 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 84.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 8.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "8 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 160.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "材料价",
+            "activity": 7.0,
+            "unit": "t",
+            "rate": 3800.0,
+            "formula": "7 t × 3800 CNY/t",
+            "source": "供给报价（S2，是否含运：否/未标注）",
+            "amount": 26600.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "运费",
+            "activity": 3360.0,
+            "unit": "t·km",
+            "rate": 0.35,
+            "formula": "7 t × 480 km × 0.35 CNY/(t·km)",
+            "source": "演示假设运价 0.35 CNY/(t·km)（待真实报价替换）",
+            "amount": 1176.0,
+            "amount_display": "",
+            "note": ""
+          },
+          {
+            "item": "装卸费",
+            "activity": 7.0,
+            "unit": "t",
+            "rate": 20.0,
+            "formula": "7 t × 20 CNY/t",
+            "source": "演示假设装卸费率 20 CNY/t",
+            "amount": 140.0,
+            "amount_display": "",
+            "note": ""
+          }
+        ],
+        "total_cny": 61760.0,
+        "problems": [],
+        "planned": {
+          "material_cny": 60200.0,
+          "freight_cny": 1260.0,
+          "handling_cny": 300.0,
+          "processing_loss_cny": 0.0,
+          "total_planned_cny": 61760.0
+        },
+        "one_time": {
+          "inspection_fee_cny": 0.0
+        },
+        "actual": {}
+      },
+      "net_avoided_kgco2e": 20843.61,
+      "recycled_mass_t": 13.9,
+      "category": "成本与碳双降",
+      "order_max_share": 0.5333,
+      "problems": [],
+      "emission_terms": [
+        {
+          "supply_id": "S1",
+          "mass_t": 8.0,
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 8.0,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 8.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 8.0,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 8.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 30 km"
+            }
+          ],
+          "status": "可计算"
+        },
+        {
+          "supply_id": "S2",
+          "mass_t": 7.0,
+          "terms": [
+            {
+              "term": "原生颗粒生产（基准）",
+              "activity_t": 7.0,
+              "factor": {
+                "factor_id": "DEMO-VIRGIN-PP-PROD",
+                "role": "baseline_material",
+                "stage": "virgin_production",
+                "material_code": "PP",
+                "value": 1800.0,
+                "unit": "kgCO2e/t",
+                "boundary": "cradle-to-gate（聚合→粒料，不含出厂运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 1800 kgCO2e/t"
+            },
+            {
+              "term": "原生料运输（基准）",
+              "activity_t": 7.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "基准运输距离 100 km（演示假设，改它只影响基准侧）"
+            },
+            {
+              "term": "再生颗粒生产（项目）",
+              "activity_t": 7.0,
+              "factor": {
+                "factor_id": "DEMO-PP-RECYCLE-PROCESS",
+                "role": "project_material",
+                "stage": "recycled_granule_production",
+                "material_code": "PP",
+                "value": 400.0,
+                "unit": "kgCO2e/t",
+                "boundary": "gate-to-gate（收集、分选、清洗、造粒，不含运输）",
+                "region": "中国",
+                "year": 2025,
+                "source_name": "演示假设因子（虚构值，待真实因子库替换）",
+                "source_url": "",
+                "version": 1,
+                "grade": "演示假设"
+              },
+              "note": "Q × 400 kgCO2e/t"
+            },
+            {
+              "term": "再生物料运输（项目）",
+              "activity_t": 7.0,
+              "factor": {
+                "factor_id": "DEFRA-ARTIC-HGV-DIESEL-2024",
+                "role": "transport",
+                "stage": "transport",
+                "material_code": "ANY",
+                "value": 0.07447,
+                "unit": "kgCO2e/(t·km)",
+                "boundary": "TTW（仅燃烧排放，不含上游 WTT）",
+                "region": "英国",
+                "year": 2024,
+                "applies_to": [
+                  "公路货运"
+                ],
+                "transport_included_in_factor": false,
+                "source_name": "BEIS/DEFRA Greenhouse gas reporting: conversion factors 2024，FlatFormat「Freighting goods / HGV (all diesel) / Articulated (>33t) / Average laden / tonne.km」",
+                "source_url": "https://www.gov.uk/government/publications/greenhouse-gas-reporting-conversion-factors-2024",
+                "version": 1,
+                "grade": "权威"
+              },
+              "note": "候选距离 480 km"
+            }
+          ],
+          "status": "可计算"
+        }
+      ]
+    }
+  ],
+  "representatives": [
+    "opt-9444f786d73d",
+    "opt-1b2ecd16f40e",
+    "opt-764913d9378c",
+    "opt-77d8419d30e3",
+    "opt-base-8bd8081867"
+  ],
+  "n1": {
+    "comparison_strategies": [
+      {
+        "option_id": "opt-9444f786d73d",
+        "label": "乙",
+        "kind": "single",
+        "allocation": {
+          "S2": 15.0
+        },
+        "min_delivery_service_rate": 0.5333,
+        "worst_case": {
+          "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+          "failed_entity": "乙",
+          "failed_batches": [
+            "S2"
+          ],
+          "fallback_available_t": 8.0,
+          "delivery_service_rate": 0.5333,
+          "gap_t": 7.0,
+          "spare_detail": [
+            "甲:8t（切换时间未知：产能上限口径，非交付保证）"
+          ]
+        },
+        "per_entity": [
+          {
+            "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "乙",
+            "failed_batches": [
+              "S2"
+            ],
+            "fallback_available_t": 8.0,
+            "delivery_service_rate": 0.5333,
+            "gap_t": 7.0,
+            "spare_detail": [
+              "甲:8t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          }
+        ],
+        "single_point_failures": [
+          "乙"
+        ],
+        "total_cost_cny": 59820.0,
+        "net_avoided_kgco2e": 20575.521,
+        "model": {
+          "failure_entity": "supplier",
+          "deadline": "2026-10-15",
+          "committed_mass_t": 15.0,
+          "logistics_days": null,
+          "switching_fee_cny_per_supplier": null,
+          "spare_reservation_t": 0.0,
+          "qualification": "eligible_only",
+          "static_capacity_only": false,
+          "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+        }
+      },
+      {
+        "option_id": "opt-1b2ecd16f40e",
+        "label": "组合：乙 7t + 甲 8t",
+        "kind": "combo",
+        "allocation": {
+          "S1": 8.0,
+          "S2": 7.0
+        },
+        "min_delivery_service_rate": 0.5333,
+        "worst_case": {
+          "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+          "failed_entity": "乙",
+          "failed_batches": [
+            "S2"
+          ],
+          "fallback_available_t": 0.0,
+          "delivery_service_rate": 0.5333,
+          "gap_t": 7.0,
+          "spare_detail": []
+        },
+        "per_entity": [
+          {
+            "failed_supplier": "甲（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "甲",
+            "failed_batches": [
+              "S1"
+            ],
+            "fallback_available_t": 11.0,
+            "delivery_service_rate": 1.0,
+            "gap_t": 0.0,
+            "spare_detail": [
+              "乙:11t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          },
+          {
+            "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "乙",
+            "failed_batches": [
+              "S2"
+            ],
+            "fallback_available_t": 0.0,
+            "delivery_service_rate": 0.5333,
+            "gap_t": 7.0,
+            "spare_detail": []
+          }
+        ],
+        "single_point_failures": [
+          "乙"
+        ],
+        "total_cost_cny": 61760.0,
+        "net_avoided_kgco2e": 20843.61,
+        "model": {
+          "failure_entity": "supplier",
+          "deadline": "2026-10-15",
+          "committed_mass_t": 15.0,
+          "logistics_days": null,
+          "switching_fee_cny_per_supplier": null,
+          "spare_reservation_t": 0.0,
+          "qualification": "eligible_only",
+          "static_capacity_only": false,
+          "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+        }
+      },
+      {
+        "option_id": "opt-764913d9378c",
+        "label": "组合：乙 7.5t + 甲 7.5t",
+        "kind": "combo",
+        "allocation": {
+          "S1": 7.5,
+          "S2": 7.5
+        },
+        "min_delivery_service_rate": 0.5333,
+        "worst_case": {
+          "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+          "failed_entity": "乙",
+          "failed_batches": [
+            "S2"
+          ],
+          "fallback_available_t": 0.5,
+          "delivery_service_rate": 0.5333,
+          "gap_t": 7.0,
+          "spare_detail": [
+            "甲:0.5t（切换时间未知：产能上限口径，非交付保证）"
+          ]
+        },
+        "per_entity": [
+          {
+            "failed_supplier": "甲（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "甲",
+            "failed_batches": [
+              "S1"
+            ],
+            "fallback_available_t": 10.5,
+            "delivery_service_rate": 1.0,
+            "gap_t": 0.0,
+            "spare_detail": [
+              "乙:10.5t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          },
+          {
+            "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "乙",
+            "failed_batches": [
+              "S2"
+            ],
+            "fallback_available_t": 0.5,
+            "delivery_service_rate": 0.5333,
+            "gap_t": 7.0,
+            "spare_detail": [
+              "甲:0.5t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          }
+        ],
+        "single_point_failures": [
+          "乙"
+        ],
+        "total_cost_cny": 61638.75,
+        "net_avoided_kgco2e": 20826.86,
+        "model": {
+          "failure_entity": "supplier",
+          "deadline": "2026-10-15",
+          "committed_mass_t": 15.0,
+          "logistics_days": null,
+          "switching_fee_cny_per_supplier": null,
+          "spare_reservation_t": 0.0,
+          "qualification": "eligible_only",
+          "static_capacity_only": false,
+          "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+        }
+      },
+      {
+        "option_id": "opt-77d8419d30e3",
+        "label": "组合：乙 11t + 甲 4t",
+        "kind": "combo",
+        "allocation": {
+          "S1": 4.0,
+          "S2": 11.0
+        },
+        "min_delivery_service_rate": 0.5333,
+        "worst_case": {
+          "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+          "failed_entity": "乙",
+          "failed_batches": [
+            "S2"
+          ],
+          "fallback_available_t": 4.0,
+          "delivery_service_rate": 0.5333,
+          "gap_t": 7.0,
+          "spare_detail": [
+            "甲:4t（切换时间未知：产能上限口径，非交付保证）"
+          ]
+        },
+        "per_entity": [
+          {
+            "failed_supplier": "甲（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "甲",
+            "failed_batches": [
+              "S1"
+            ],
+            "fallback_available_t": 7.0,
+            "delivery_service_rate": 1.0,
+            "gap_t": 0.0,
+            "spare_detail": [
+              "乙:7t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          },
+          {
+            "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "乙",
+            "failed_batches": [
+              "S2"
+            ],
+            "fallback_available_t": 4.0,
+            "delivery_service_rate": 0.5333,
+            "gap_t": 7.0,
+            "spare_detail": [
+              "甲:4t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          }
+        ],
+        "single_point_failures": [
+          "乙"
+        ],
+        "total_cost_cny": 60790.0,
+        "net_avoided_kgco2e": 20709.57,
+        "model": {
+          "failure_entity": "supplier",
+          "deadline": "2026-10-15",
+          "committed_mass_t": 15.0,
+          "logistics_days": null,
+          "switching_fee_cny_per_supplier": null,
+          "spare_reservation_t": 0.0,
+          "qualification": "eligible_only",
+          "static_capacity_only": false,
+          "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+        }
+      }
+    ],
+    "comparison_evidence": {
+      "comparison": "补证对照（固定采购方案不变，只改变证据状态）",
+      "model": {
+        "failure_entity": "supplier",
+        "deadline": "2026-10-15",
+        "committed_mass_t": 15.0,
+        "logistics_days": null,
+        "switching_fee_cny_per_supplier": null,
+        "spare_reservation_t": 0.0,
+        "qualification": "eligible_only",
+        "static_capacity_only": false,
+        "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+      },
+      "fixed_option": {
+        "option_id": "opt-9444f786d73d",
+        "label": "乙",
+        "allocation": {
+          "S2": 15.0
+        }
+      },
+      "before": [
+        {
+          "option_id": "opt-9444f786d73d",
+          "label": "乙",
+          "kind": "single",
+          "allocation": {
+            "S2": 15.0
+          },
+          "min_delivery_service_rate": 0.5333,
+          "worst_case": {
+            "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "乙",
+            "failed_batches": [
+              "S2"
+            ],
+            "fallback_available_t": 8.0,
+            "delivery_service_rate": 0.5333,
+            "gap_t": 7.0,
+            "spare_detail": [
+              "甲:8t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          },
+          "per_entity": [
+            {
+              "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+              "failed_entity": "乙",
+              "failed_batches": [
+                "S2"
+              ],
+              "fallback_available_t": 8.0,
+              "delivery_service_rate": 0.5333,
+              "gap_t": 7.0,
+              "spare_detail": [
+                "甲:8t（切换时间未知：产能上限口径，非交付保证）"
+              ]
+            }
+          ],
+          "single_point_failures": [
+            "乙"
+          ],
+          "total_cost_cny": null,
+          "net_avoided_kgco2e": null,
+          "model": {
+            "failure_entity": "supplier",
+            "deadline": "2026-10-15",
+            "committed_mass_t": 15.0,
+            "logistics_days": null,
+            "switching_fee_cny_per_supplier": null,
+            "spare_reservation_t": 0.0,
+            "qualification": "eligible_only",
+            "static_capacity_only": false,
+            "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+          }
+        }
+      ],
+      "after": [
+        {
+          "option_id": "opt-9444f786d73d",
+          "label": "乙",
+          "kind": "single",
+          "allocation": {
+            "S2": 15.0
+          },
+          "min_delivery_service_rate": 0.5333,
+          "worst_case": {
+            "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+            "failed_entity": "乙",
+            "failed_batches": [
+              "S2"
+            ],
+            "fallback_available_t": 8.0,
+            "delivery_service_rate": 0.5333,
+            "gap_t": 7.0,
+            "spare_detail": [
+              "甲:8t（切换时间未知：产能上限口径，非交付保证）"
+            ]
+          },
+          "per_entity": [
+            {
+              "failed_supplier": "乙（实体身份按供应商名近似，无 supplier_id）",
+              "failed_entity": "乙",
+              "failed_batches": [
+                "S2"
+              ],
+              "fallback_available_t": 8.0,
+              "delivery_service_rate": 0.5333,
+              "gap_t": 7.0,
+              "spare_detail": [
+                "甲:8t（切换时间未知：产能上限口径，非交付保证）"
+              ]
+            }
+          ],
+          "single_point_failures": [
+            "乙"
+          ],
+          "total_cost_cny": null,
+          "net_avoided_kgco2e": null,
+          "model": {
+            "failure_entity": "supplier",
+            "deadline": "2026-10-15",
+            "committed_mass_t": 15.0,
+            "logistics_days": null,
+            "switching_fee_cny_per_supplier": null,
+            "spare_reservation_t": 0.0,
+            "qualification": "eligible_only",
+            "static_capacity_only": false,
+            "joint_failure_model": "单家供应商失效（未启用共同失效模型，只测单家失效）"
+          }
+        }
+      ],
+      "delta_service_rate": 0.0,
+      "conclusion_note": "服务率变化只归因于证据补证（备用供给资格改变）；采购策略差异见 n1_compare_strategies（对照一）"
+    }
+  },
+  "evidence": {
+    "actions": [],
+    "quality": [
+      {
+        "supply_id": "S1",
+        "score": 1.44,
+        "grade": "高",
+        "flags": [],
+        "critical_missing": [],
+        "gate_state": "eligible"
+      },
+      {
+        "supply_id": "S2",
+        "score": 1.65,
+        "grade": "中",
+        "flags": [],
+        "critical_missing": [],
+        "gate_state": "eligible"
+      }
+    ]
+  },
+  "unknowns": [],
+  "boundaries": {
+    "functional_unit": "交付 1 t 满足需方规格的合格颗粒",
+    "scope": "原生颗粒生产与运输（基准）、再生颗粒生产与运输（项目）；不含使用阶段与处置环节",
+    "emission_note": "净减排为情景核算（同一功能单位），非实测减排",
+    "demo_note": "演示因子为虚构演示假设因子；未核实数值保持演示身份"
+  },
+  "next_actions": [
+    "对「待核验」批次补送样检测",
+    "与最低成本供给议价",
+    "核对基准运输距离假设与各批次实际运输路线"
+  ]
+}

@@ -1,0 +1,60 @@
+# 影子因子集：真因子影子试算（影子专用，不触生产配置）。
+# 来源一（再生侧）：openLCA Nexus「EcoProfiles Recycled Plastics」（GreenDelta
+#   GmbH，2025-05，PRIMUS/Horizon Europe No.101057067），CC BY 4.0，PDF 原件同目录。
+# 来源二（原生侧）：ACC/Franklin Associates「Cradle-to-Gate LCA of Polypropylene
+#   Resin」（2021-02 发布，美国 2015-2016 年数据），Table 6：原料链 1,275 + 树脂
+#   生产 273 = 1,548 kgCO2e/t（cradle-to-gate，出厂口径）；公开 PDF 原件同目录。
+# 换算：数据集以 1 kg 颗粒为声明单位的值 ×1000；value_min/value_max 取已发布的
+#   前景数据不确定度（无发布不确定度则不设区间）。
+scenarios:
+  - scenario: c2g_convention_conflict
+    note: 再生侧含收集分选口径；与现行约定关键词 gate-to-gate 冲突，引擎应拦截（边界兼容性发现记录）
+    overrides:
+      - factor_id: DEMO-PP-RECYCLE-PROCESS
+        value: 1020.0
+        value_min: 880.0
+        value_max: 1160.0
+        unit: kgCO2e/t
+        boundary: cradle-to-gate（收集、分选、机械回收造粒；cut-off；不含出厂运输）
+        region: EU27+3（欧洲平均）
+        year_int: 2022
+        source_name: openLCA EcoProfiles Recycled Plastics — rPP pellets EU27+3, cradle-to-gate
+        source_url: https://nexus.openlca.org/ws/files/38602
+        pdf: EcoProfile_rPP_pellets_EU_c2g.pdf
+  - scenario: g2g_narrow
+    note: 再生侧窄口径（分选后废料起点→造粒），约定关键词兼容
+    overrides:
+      - factor_id: DEMO-PP-RECYCLE-PROCESS
+        value: 450.0
+        value_min: 421.0
+        value_max: 479.0
+        unit: kgCO2e/t
+        boundary: gate-to-gate（分选后塑料废料→机械回收造粒；cut-off；不含出厂运输）
+        region: EU27+3（欧洲平均）
+        year_int: 2022
+        source_name: openLCA EcoProfiles Recycled Plastics — rPP pellets EU27+3, gate-to-gate
+        source_url: https://nexus.openlca.org/ws/files/38603
+        pdf: EcoProfile_rPP_pellets_EU_g2g.pdf
+  - scenario: real_pair_g2g
+    note: 双侧真因子（原生=ACC 1548 cradle-to-gate；再生=EcoProfiles g2g 450±29），两侧关键词均兼容
+    overrides:
+      - factor_id: DEMO-VIRGIN-PP-PROD
+        value: 1548.0
+        unit: kgCO2e/t
+        boundary: cradle-to-gate（原料开采→丙烯→聚丙烯树脂出厂，不含出厂运输）
+        region: 美国（2015-2016 年数据）
+        year_int: 2021
+        source_name: ACC/Franklin Associates — Cradle-to-Gate LCA of Polypropylene Resin (2021), Table 6
+        source_url: https://www.americanchemistry.com/content/download/8063/file/Cradle-to-Gate-Life-Cycle-Analysis-of-Polypropylene-PP-Resin.pdf
+        pdf: ACC_PP_Resin_CradleToGate_LCA.pdf
+      - factor_id: DEMO-PP-RECYCLE-PROCESS
+        value: 450.0
+        value_min: 421.0
+        value_max: 479.0
+        unit: kgCO2e/t
+        boundary: gate-to-gate（分选后塑料废料→机械回收造粒；cut-off；不含出厂运输）
+        region: EU27+3（欧洲平均）
+        year_int: 2022
+        source_name: openLCA EcoProfiles Recycled Plastics — rPP pellets EU27+3, gate-to-gate
+        source_url: https://nexus.openlca.org/ws/files/38603
+        pdf: EcoProfile_rPP_pellets_EU_g2g.pdf

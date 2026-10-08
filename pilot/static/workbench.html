@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2032%2032%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%233f9d74%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23144d33%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2732%27%20height%3D%2732%27%20rx%3D%278%27%20fill%3D%27url%28%23g%29%27%2F%3E%3Ccircle%20cx%3D%2716%27%20cy%3D%2716%27%20r%3D%276.5%27%20fill%3D%27%23fff%27%2F%3E%3C%2Fsvg%3E">
+<title>供需透镜 · 试点工作台</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>供需透镜 · 试点工作台</h1>
+    <span class="user-chip" id="user-chip">未登录</span>
+    <span class="spacer"></span>
+    <button id="btn-logout" class="no-print" hidden>退出</button>
+  </header>
+
+  <!-- 登录 / 初始化 -->
+  <section id="view-auth" hidden>
+    <div class="card" style="max-width:440px">
+      <h3 id="auth-title">登录</h3>
+      <label>用户名</label><input id="auth-username" autocomplete="username">
+      <label>密码</label><input id="auth-password" type="password" autocomplete="current-password">
+      <div class="form-actions">
+        <button class="primary" id="btn-auth-submit">登录</button>
+      </div>
+      <p class="empty" id="auth-hint"></p>
+    </div>
+  </section>
+
+  <!-- 任务列表 -->
+  <section id="view-tasks" hidden>
+    <h2>替代任务<span class="sub">创建替代任务 → 导入/录入供需 → 处理数据问题 → 审查候选 →
+      建立补证/询价任务 → 计算并比较方案 → 人工选定/审批 → 导出快照 → 记录履约反馈</span></h2>
+    <button class="primary" id="btn-new-task">新建替代任务</button>
+    <button id="btn-matching">多需求撮合</button>
+    <div id="task-list"></div>
+    <div id="admin-panel"></div>
+  </section>
+
+  <!-- 多需求撮合（只读试算，v16） -->
+  <section id="view-matching" hidden>
+    <button id="btn-matching-back">← 返回任务列表</button>
+    <h2>多需求撮合<span class="sub">勾选多个替代任务 → 跨任务撮合建议试算。撮合建议（非交易/非预留）：
+      即算即返、不落库、不产生预留或占用，不改变批次库存真相；批次容量=实时全局可用量。</span></h2>
+    <div class="card">
+      <h3>选择需求（任务）</h3>
+      <div id="matching-task-list"></div>
+      <div class="form-actions">
+        <button class="primary" id="btn-matching-run">计算撮合建议</button>
+        <span class="empty" id="matching-hint"></span>
+      </div>
+    </div>
+    <div id="matching-results"></div>
+  </section>
+
+  <!-- 任务详情 -->
+  <section id="view-task" hidden>
+    <button id="btn-back">← 返回任务列表</button>
+    <h2 id="task-title"></h2>
+    <div class="tabs" id="task-tabs" role="tablist">
+      <button data-tab="demand" role="tab">1 需求</button>
+      <button data-tab="supplies" role="tab">2 供需与质量</button>
+      <button data-tab="evidence" role="tab">3 候选与证据任务</button>
+      <button data-tab="compare" role="tab">4 方案比较</button>
+      <button data-tab="passport" role="tab">5 决策护照</button>
+      <button data-tab="feedback" role="tab">6 履约反馈</button>
+    </div>
+
+    <div id="tab-demand"></div>
+    <div id="tab-supplies"></div>
+    <div id="tab-evidence"></div>
+    <div id="tab-compare"></div>
+    <div id="tab-passport"></div>
+    <div id="tab-feedback"></div>
+  </section>
+
+  <footer>供需透镜试点工作台：单组织独立部署 · 数据保存在本机 SQLite ·
+    净减排为情景核算，非实测减排 · 界面偏好存于浏览器本地，业务数据在服务端。
+  </footer>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
