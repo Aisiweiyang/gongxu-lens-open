@@ -72,7 +72,7 @@ Real use requires verified inputs, test reports, factors, and commercial terms. 
 
 ## Acknowledgements
 
-Thank you to **秦仲远 (Qin Zhongyuan)** and **杨初墨 (Yang Chumo)** for their assistance with the project.
+Thank you to **秦仲远 (Qin Zhongyuan)** and **杨笑墨 (Yang Xiaomo)** for their assistance with the project.
 
 ## License
 
